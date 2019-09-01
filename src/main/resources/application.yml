@@ -1,5 +1,10 @@
 server:
   port: 8081
+
+jwt:
+  secret: secret-key
+  expire: 300000
+  
 spring:
  datasource:
    url: jdbc:postgresql://localhost:5432/santander?compatible=7.2
