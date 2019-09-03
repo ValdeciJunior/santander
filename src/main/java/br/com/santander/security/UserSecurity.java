@@ -16,6 +16,7 @@ public class UserSecurity implements UserDetails {
 	private String uuid;
 	private String username;
 	private String password;
+	private Integer codigoUsuario;
 	private Collection<? extends GrantedAuthority> authorities;
 	
 	public UserSecurity() {
@@ -23,10 +24,11 @@ public class UserSecurity implements UserDetails {
 	
 	
 	
-	public UserSecurity(String uuid, String username, String password, Set<Perfil> perfis) {
+	public UserSecurity(String uuid, String username, String password, Set<Perfil> perfis, Integer codigousuario) {
 		this.uuid = uuid;
 		this.username = username;
 		this.password = password;
+		this.codigoUsuario = codigousuario;
 		this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao())).collect(Collectors.toList());  
 	}
 
@@ -69,6 +71,18 @@ public class UserSecurity implements UserDetails {
 
 	public String getUuid() {
 		return uuid;
+	}
+
+
+
+	public Integer getCodigoUsuario() {
+		return codigoUsuario;
+	}
+
+
+
+	public void setCodigoUsuario(Integer codigoUsuario) {
+		this.codigoUsuario = codigoUsuario;
 	}
 
 }

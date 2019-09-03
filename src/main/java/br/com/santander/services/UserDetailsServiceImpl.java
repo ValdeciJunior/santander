@@ -1,6 +1,7 @@
 package br.com.santander.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,7 +23,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		System.out.println("DADOS-------------------------------");
 		System.out.println(usuario.getUsername());
 		System.out.println();
-		return new UserSecurity(usuario.getUuid(), usuario.getUsername(), usuario.getPassword(), usuario.getPerfis());
+		return new UserSecurity(usuario.getUuid(), usuario.getUsername(), usuario.getPassword(), usuario.getPerfis(), usuario.getCodigo());
 	}
+	
+	public UserSecurity get(){
+        return (UserSecurity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
 
 }

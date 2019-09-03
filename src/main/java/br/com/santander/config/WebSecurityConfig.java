@@ -19,6 +19,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 
 import br.com.santander.security.JWTAuthenticationFilter;
+import br.com.santander.security.JWTAuthorizationFilter;
 import br.com.santander.security.JWTUtil;
 
 @Configuration
@@ -39,6 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			authorizeRequests()
 				.anyRequest().authenticated().and().formLogin();
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 	}
 	
 	@Override
