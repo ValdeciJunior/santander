@@ -97,10 +97,25 @@ public class GastoService {
 		return gasto.get();
 	}
 	
+	/**
+	 * Método de uso interno(private) para recuperar os gastos por uma descriç~ao
+	 * @author valdeci
+	 * @param descricao
+	 * @param codigousuario
+	 * @return
+	 */
 	private List<Gasto> gastosPorDescricao(String descricao, Integer codigousuario){
 		return gastoRepository.findAllByLikeDescricaoAndCodigousuario(descricao, codigousuario);
 	}
 	
+	/**
+	 * Esse método altera a categoria de um gasto que foi 
+	 * @author valdeci
+	 * @param categoria
+	 * @param uuid
+	 * @param codigousuario
+	 * @return
+	 */
 	public GastoDTO alterarCategoria(String categoria, String uuid, Integer codigousuario) {
 		Gasto gasto = get(uuid, codigousuario);
 		gasto.setCategoria(categoria);
@@ -110,7 +125,14 @@ public class GastoService {
 		return gastoDTO;
 	}
 	
-	public Boolean dataValida(String data) {
+	/**
+	 * Método de uso interno para fazer algumas validações de data. Esse método não foi copiado da internet. O mesmo
+	 * foi elaborado por mim
+	 * @author valdeci
+	 * @param data
+	 * @return
+	 */
+	private Boolean dataValida(String data) {
     	if(data == null) {
     		ResponseUtil.mensagemErro("Valor da data está Null");
     		return false;
