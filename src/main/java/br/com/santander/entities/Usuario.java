@@ -29,6 +29,10 @@ public class Usuario {
 	@Column(name = "id", nullable = false, unique = true)
 	private String uuid;
 	
+	@GeneratedValue
+	@Column(name="codigo")
+	private Integer codigo;
+	
 	@Column(name="username", nullable = false)
 	private String username;
 	
@@ -78,6 +82,14 @@ public class Usuario {
 
 	public void setPerfis(Set<Integer> perfis) {
 		this.perfis = perfis;
+	}
+
+	public Integer getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
 	
 	
