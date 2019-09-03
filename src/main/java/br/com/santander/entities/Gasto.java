@@ -26,6 +26,9 @@ public class Gasto {
 	@Column(name = "descricao")
 	private String descricao;
 	
+	@Column(name = "categoria")
+	private String categoria;
+	
 	@Column(name="valor", columnDefinition="Decimal(10,2) default '0.00'")
 	private BigDecimal valor;
 	
@@ -74,6 +77,14 @@ public class Gasto {
 
 	public void setData(Date data) {
 		this.data = data;
+	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 
 	@Override
