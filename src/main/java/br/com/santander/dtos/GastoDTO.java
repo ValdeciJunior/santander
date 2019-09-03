@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class GastoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -13,6 +15,7 @@ public class GastoDTO implements Serializable{
 	
 	private BigDecimal valor;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", locale = "pt-BR", timezone = "Brazil/East")
 	private Date data;
 
 	public String getUuid() {

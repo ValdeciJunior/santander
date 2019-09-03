@@ -11,7 +11,7 @@ import br.com.santander.services.UsuarioService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SantanderApplicationTests {
+public class SantanderApplicationTests extends AbstractTest {
 	
 	@Autowired
 	private BCryptPasswordEncoder e;

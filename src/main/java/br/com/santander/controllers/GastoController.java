@@ -18,42 +18,46 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.santander.dtos.GastoDTO;
 import br.com.santander.entities.Gasto;
 import br.com.santander.services.GastoService;
+import br.com.santander.services.UserDetailsServiceImpl;
 
 @RestController
 @RequestMapping("/gastos")
 public class GastoController {
 
 	@Autowired
+	private UserDetailsServiceImpl userDetails;
+	
+	@Autowired
 	private GastoService gastoService;
 	
 	@PostMapping
-	public Gasto cadastrar(@RequestBody GastoDTO gasto) {
-		return gastoService.cadastrar(gasto);
+	public GastoDTO cadastrar(@RequestBody GastoDTO gasto) {
+		return gastoService.cadastrar(gasto, userDetails.get().getCodigoUsuario());
 	}
 	
 	@GetMapping("/{uuid}")
 	public GastoDTO get(@PathVariable("uuid") String uuid) {
-		return gastoService.getDTO(uuid);
+		return gastoService.getDTO(uuid, userDetails.get().getCodigoUsuario());
 	}
 	
 	@GetMapping
 	public List<GastoDTO> gastos(){
-		return gastoService.listar();
+		return gastoService.listar(userDetails.get().getCodigoUsuario());
 	}
 	
-	@GetMapping("/por-data")
-	public List<GastoDTO> gastosPorData(@RequestParam("data") Date data){
-		return gastoService.listarPorData(data);
+	@GetMapping("/por-data/{data}")
+	public List<GastoDTO> gastosPorData(@PathVariable("data") String data){
+		return gastoService.listarPorData(data, userDetails.get().getCodigoUsuario());
 	}
 	
 	@PutMapping("/altera-categoria/{uuid}")
 	public GastoDTO alterarCategoria(@RequestParam("categoria") String categoria, @PathVariable("uuid") String uuid) {
-		return gastoService.alterarCategoria(categoria, uuid);
+		return gastoService.alterarCategoria(categoria, uuid, userDetails.get().getCodigoUsuario());
 	}
 	
 	@GetMapping("/pesquisar-categoria/{categoria}")
 	public List<String> pesquisarCategorias(@PathVariable("categoria")String categoria){
-		return gastoService.pesquisarCategorias(categoria);
+		return gastoService.pesquisarCategorias(categoria, userDetails.get().getCodigoUsuario());
 	}
 	
 	
