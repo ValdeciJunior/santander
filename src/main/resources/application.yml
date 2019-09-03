@@ -10,6 +10,13 @@ spring:
    url: jdbc:postgresql://localhost:5432/santander?compatible=7.2
    username: postgres
    password: postgres
+ flyway:
+   url: jdbc:postgresql://localhost:5432/santander?compatible=7.2
+   schemas: public
+   user: postgres
+   password: postgres
+   baselineOnMigrate: true
+ 
  jpa:
    properties:
      hibernate:
