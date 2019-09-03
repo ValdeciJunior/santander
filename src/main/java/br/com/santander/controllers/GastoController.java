@@ -45,8 +45,8 @@ public class GastoController {
 		return gastoService.listar(userDetails.get().getCodigoUsuario());
 	}
 	
-	@GetMapping("/por-data/{data}")
-	public List<GastoDTO> gastosPorData(@PathVariable("data") String data){
+	@GetMapping("/por-data")
+	public List<GastoDTO> gastosPorData(@RequestParam("data") String data){
 		return gastoService.listarPorData(data, userDetails.get().getCodigoUsuario());
 	}
 	
