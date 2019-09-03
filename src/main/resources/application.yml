@@ -2,8 +2,8 @@ server:
   port: 8081
 
 jwt:
-  secret: secret-key
-  expire: 300000
+  secret: quero-ir-para-sao-paulo
+  expire: 90000000
   
 spring:
  datasource:
