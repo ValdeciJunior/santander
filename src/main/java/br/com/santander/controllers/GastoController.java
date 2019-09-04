@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,7 +52,7 @@ public class GastoController {
 	 * @return GastoDTO
 	 */
 	@GetMapping("/{uuid}")
-	public GastoDTO get(@PathVariable("uuid") String uuid) {
+	public GastoDTO get(@NotBlank(message = "Uuid de gasto não pode ser nulo") @PathVariable("uuid") String uuid) {
 		return gastoService.getDTO(uuid, userDetails.get().getCodigoUsuario());
 	}
 	
@@ -71,7 +74,7 @@ public class GastoController {
 	 * @return
 	 */
 	@GetMapping("/por-data")
-	public List<GastoDTO> gastosPorData(@RequestParam("data") String data){
+	public List<GastoDTO> gastosPorData(@NotNull(message = "Data não pode ser nula") @RequestParam("data") String data){
 		return gastoService.listarPorData(data, userDetails.get().getCodigoUsuario());
 	}
 	
@@ -84,7 +87,8 @@ public class GastoController {
 	 * @return GastoDTO
 	 */
 	@PutMapping("/altera-categoria/{uuid}")
-	public GastoDTO alterarCategoria(@RequestParam("categoria") String categoria, @PathVariable("uuid") String uuid) {
+	public GastoDTO alterarCategoria(@NotBlank(message = "Categoria não pode ser nula ou ficar em branco") @RequestParam("categoria") String categoria, 
+			@NotBlank(message = "Uuid não pode ser nulo ou ficar em branco") @PathVariable("uuid") String uuid) {
 		return gastoService.alterarCategoria(categoria, uuid, userDetails.get().getCodigoUsuario());
 	}
 	
@@ -96,7 +100,7 @@ public class GastoController {
 	 * @return List<String> 
 	 */
 	@GetMapping("/pesquisar-categoria/{categoria}")
-	public List<String> pesquisarCategorias(@PathVariable("categoria")String categoria){
+	public List<String> pesquisarCategorias(@NotNull(message = "Categoria não pode ser nula") @PathVariable("categoria")String categoria){
 		return gastoService.pesquisarCategorias(categoria, userDetails.get().getCodigoUsuario());
 	}
 	
